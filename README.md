@@ -72,8 +72,8 @@ OpenAI API Documentation – for natural language processing and report summariz
 
 ## 🖼️ Assets / Screenshots
 <p align="center">
-  <img src="Desktop/assets/homepage.png" alt="Application Screenshot" width="220" /><br/>
-  <img src="assets/dashboard.png" alt="Application Screenshot" width="600" />
+  <img src="homepage.png" alt="Application Screenshot" width="220" /><br/>
+  <img src="dashboard.png" alt="Application Screenshot" width="600" />
 </p>
 
 ---
