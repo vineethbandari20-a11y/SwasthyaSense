@@ -1,0 +1,5 @@
+{
+  "name": "SwasthyaSense",
+  "description": "A modern, responsive, and visually appealing web interface for a healthcare AI platform that helps verify medical prescriptions, analyze diagnostic scans (X-rays, ECGs, MRIs), and generate simplified patient-friendly reports.",
+  "requestFramePermissions": []
+}
