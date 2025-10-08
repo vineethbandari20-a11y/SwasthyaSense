@@ -50,8 +50,7 @@
 ---
 
 ## 📹 Demonstration Video
-▶️ https://drive.google.com/file/d/1VTzus5QwtvIoRAKCzdIK3j-hXxeaSvhC/view?usp=drivesdk
-
+▶️ https://drive.google.com/file/d/1cwuX--hrP9WinkZ-Nw2s5LgEJ4BaNLZa/view?usp=drivesdk
 ---
 
 
