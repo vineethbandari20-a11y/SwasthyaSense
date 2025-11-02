@@ -49,7 +49,8 @@ const PrescriptionDetailView: React.FC<{ report: AnalysisResult; onBack: () => v
                 <div>
                      <button onClick={onBack} className="text-sm text-primary hover:underline mb-2">&larr; Back to All Reports</button>
                     <h2 className="text-3xl font-bold text-slate-200">Prescription Analysis Report</h2>
-                    <p className="text-sm text-slate mt-1">Report ID: {report.id}</p>
+                    <p className="text-sm text-slate mt-1">{new Date(report.date).toLocaleString(undefined, { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</p>
+                    <p className="text-xs text-slate">Report ID: {report.id}</p>
                 </div>
                 <div className="flex items-center space-x-4">
                     <div className="bg-lightest-navy p-1 rounded-full flex">
@@ -174,7 +175,8 @@ const ScanDetailView: React.FC<{ report: AnalysisResult; onBack: () => void }> =
                 <div>
                     <button onClick={onBack} className="text-sm text-primary hover:underline mb-2">&larr; Back to All Reports</button>
                     <h2 className="text-3xl font-bold text-slate-200">Scan Analysis Report</h2>
-                    <p className="text-sm text-slate mt-1">Report ID: {report.id}</p>
+                    <p className="text-sm text-slate mt-1">{new Date(report.date).toLocaleString(undefined, { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</p>
+                    <p className="text-xs text-slate">Report ID: {report.id}</p>
                 </div>
                  <div className="flex items-center space-x-4">
                     <div className="bg-lightest-navy p-1 rounded-full flex">
@@ -301,7 +303,7 @@ const ReportsListView: React.FC<{ reports: AnalysisResult[]; onSelectReport: (re
                                         <div>
                                             <p className="font-semibold text-lightest-slate">{report.uploadedFile.name}</p>
                                             <p className="text-sm text-slate mt-1">
-                                                Analyzed on: {new Date(report.date).toLocaleDateString()}
+                                                Analyzed on: {new Date(report.date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}
                                             </p>
                                         </div>
                                     </div>

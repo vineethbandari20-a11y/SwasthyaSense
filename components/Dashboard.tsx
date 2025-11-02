@@ -155,7 +155,7 @@ const Dashboard: React.FC<DashboardProps> = ({ history, onNavigate }) => {
                                 <div>
                                     <p className="font-semibold text-lightest-slate">{report.uploadedFile.name}</p>
                                     <p className="text-sm text-slate mt-1">
-                                        Type: <span className="font-medium capitalize">{report.type}</span> | Analyzed on: {new Date(report.date).toLocaleDateString()}
+                                        Type: <span className="font-medium capitalize">{report.type}</span> | Analyzed on: {new Date(report.date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}
                                     </p>
                                 </div>
                                 <div className="flex items-center space-x-4">

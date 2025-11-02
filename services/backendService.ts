@@ -77,7 +77,7 @@ export const performAnalysisOnBackend = async (file: File, type: AnalysisType, u
         try {
             const imagePart = await fileToGenerativePart(file);
             const textPart = {
-                text: `You are a world-class clinical pharmacist AI assistant. Your purpose is to analyze medical prescriptions with extreme precision. Analyze the provided prescription image. Extract each medication, its dosage, and frequency. Verify this information against standard medical guidelines. Identify any potential drug-drug interactions, incorrect dosages, or other safety concerns. Provide a detailed technical summary for a medical professional and a simplified, easy-to-understand summary for the patient. Assess the overall risk level and provide a safety score. The output must be a single, valid JSON object that strictly adheres to the provided schema. Do not include any markdown formatting like \`\`\`json.`
+                text: `You are a world-class clinical pharmacist AI assistant. Your purpose is to analyze medical prescriptions with extreme precision. Analyze the provided prescription image. Extract each medication, its dosage, and frequency. Verify this information against standard medical guidelines. Identify any potential drug-drug interactions, incorrect dosages, or other safety concerns. Provide a detailed technical summary for a medical professional and a simplified, easy-to-understand summary for the patient. Assess the overall risk level and provide a safety score. Your analysis must be consistent and reproducible. The output must be a single, valid JSON object that strictly adheres to the provided schema. Do not include any markdown formatting like \`\`\`json.`
             };
             const schema = {
                 type: Type.OBJECT,
@@ -124,6 +124,8 @@ export const performAnalysisOnBackend = async (file: File, type: AnalysisType, u
                 config: {
                     responseMimeType: "application/json",
                     responseSchema: schema,
+                    temperature: 0.1, // Lower temperature for more deterministic results
+                    systemInstruction: "You are a highly precise clinical pharmacist AI. Accuracy and consistency are paramount. Base your analysis strictly on the provided image and established medical guidelines."
                 },
             });
 
@@ -174,7 +176,7 @@ Analyze the provided X-ray image. Meticulously identify any and all abnormalitie
 - Joint dislocations or signs of arthritis
 - Foreign objects
 For each finding, specify its precise anatomical location and severity. Provide a comprehensive technical summary for a medical professional, including potential differential diagnoses. Also, generate a simplified, clear summary for the patient. Finally, assess the overall risk level and provide a safety score reflecting your confidence in the scan's normality.
-The output must be a single, valid JSON object that strictly adheres to the provided schema. Do not include any markdown formatting or extraneous text.`;
+Your analysis must be consistent and reproducible. The output must be a single, valid JSON object that strictly adheres to the provided schema. Do not include any markdown formatting or extraneous text.`;
             } else if (lowerCaseFileName.includes('ecg') || lowerCaseFileName.includes('ekg') || lowerCaseFileName.includes('electrocardiogram')) {
                 promptText = `CRITICAL MEDICAL TASK: You are a world-class cardiologist AI assistant specializing in ECG interpretation. Your primary function is to analyze electrocardiogram (ECG/EKG) traces with the highest degree of accuracy. Errors can have serious consequences.
 Analyze the provided ECG image. Meticulously identify any and all abnormalities, paying close attention to:
@@ -184,7 +186,7 @@ Analyze the provided ECG image. Meticulously identify any and all abnormalities,
 - Evidence of hypertrophy (ventricular or atrial)
 - Conduction abnormalities (e.g., bundle branch blocks, AV blocks)
 For each finding, specify its characteristics and location (e.g., which leads are affected). Provide a comprehensive technical summary for a medical professional, including potential diagnoses. Also, generate a simplified, clear summary for the patient. Finally, assess the overall risk level and provide a safety score reflecting your confidence in the ECG's normality.
-The output must be a single, valid JSON object that strictly adheres to the provided schema. Do not include any markdown formatting or extraneous text.`;
+Your analysis must be consistent and reproducible. The output must be a single, valid JSON object that strictly adheres to the provided schema. Do not include any markdown formatting or extraneous text.`;
             } else if (lowerCaseFileName.includes('mri') || lowerCaseFileName.includes('magnetic resonance')) {
                 promptText = `CRITICAL MEDICAL TASK: You are a world-class radiologist AI assistant specializing in MRI interpretation. Your primary function is to analyze Magnetic Resonance Imaging (MRI) scans with the highest degree of accuracy, focusing on soft tissue. Errors can have serious consequences.
 Analyze the provided MRI image. Meticulously identify any and all abnormalities, paying close attention to:
@@ -194,9 +196,9 @@ Analyze the provided MRI image. Meticulously identify any and all abnormalities,
 - Signs of neurological conditions (e.g., in brain MRIs, look for plaques, tumors, signs of stroke)
 - Degenerative changes in joints or the spine
 For each finding, specify its precise anatomical location, size, and characteristics (e.g., signal intensity). Provide a comprehensive technical summary for a medical professional. Also, generate a simplified, clear summary for the patient. Finally, assess the overall risk level and provide a safety score reflecting your confidence in the scan's normality.
-The output must be a single, valid JSON object that strictly adheres to the provided schema. Do not include any markdown formatting or extraneous text.`;
+Your analysis must be consistent and reproducible. The output must be a single, valid JSON object that strictly adheres to the provided schema. Do not include any markdown formatting or extraneous text.`;
             } else {
-                promptText = `CRITICAL MEDICAL TASK: You are a world-class radiologist AI assistant. Your primary function is to analyze medical scans with the highest degree of accuracy and provide detailed, structured reports suitable for clinical use. Errors can have serious consequences. Analyze the provided medical image. Meticulously identify any and all abnormalities, such as fractures, nodules, masses, inflammation, or fluid buildup. For each finding, specify its precise anatomical location and severity. Provide a comprehensive technical summary for a medical professional, including potential differential diagnoses if applicable. Also, generate a simplified, clear summary for the patient. Finally, assess the overall risk level and provide a safety score reflecting your confidence in the scan's normality. The output must be a single, valid JSON object that strictly adheres to the provided schema. Do not include any markdown formatting or extraneous text.`;
+                promptText = `CRITICAL MEDICAL TASK: You are a world-class radiologist AI assistant. Your primary function is to analyze medical scans with the highest degree of accuracy and provide detailed, structured reports suitable for clinical use. Errors can have serious consequences. Analyze the provided medical image. Meticulously identify any and all abnormalities, such as fractures, nodules, masses, inflammation, or fluid buildup. For each finding, specify its precise anatomical location and severity. Provide a comprehensive technical summary for a medical professional, including potential differential diagnoses if applicable. Also, generate a simplified, clear summary for the patient. Finally, assess the overall risk level and provide a safety score reflecting your confidence in the scan's normality. Your analysis must be consistent and reproducible. The output must be a single, valid JSON object that strictly adheres to the provided schema. Do not include any markdown formatting or extraneous text.`;
             }
             
             const textPart = { text: promptText };
@@ -244,6 +246,8 @@ The output must be a single, valid JSON object that strictly adheres to the prov
                 config: {
                     responseMimeType: "application/json",
                     responseSchema: schema,
+                    temperature: 0.1, // Lower temperature for more deterministic and accurate results
+                    systemInstruction: "You are a world-class diagnostic AI assistant. Your analysis must be clinically accurate, precise, and consistent. All findings must be based strictly on the visual evidence within the provided medical scan."
                 },
             });
 
